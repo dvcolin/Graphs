@@ -169,7 +169,7 @@ class Graph:
                     # IF SO, RETURN THE PATH
                 return path
             # Check if it's been visited
-            elif last_vertex not in visited:
+            if last_vertex not in visited:
                 # If it has not been visited...
                 visited.add(last_vertex)
             # Mark it as visited
@@ -181,16 +181,34 @@ class Graph:
                     s.push(new_path)
             # (Make a copy of the path before adding)
 
+    def dfs_recursive(self, starting_vertex, destination_vertex, path=[1], visited=set()):
+        """
+        Return a list containing a path from
+        starting_vertex to destination_vertex in
+        depth-first order.
+    ​
+        This should be done using recursion.
+        """
+        last_vertex = path[len(path) - 1]
 
-def dfs_recursive(self, starting_vertex, destination_vertex):
-    """
-    Return a list containing a path from
-    starting_vertex to destination_vertex in
-    depth-first order.
-​
-    This should be done using recursion.
-    """
-    pass  # TODO
+        if last_vertex == destination_vertex:
+            print(path)
+            # PRINTS
+            # [1, 2, 4, 6]
+            # [1, 2, 4, 7, 6]
+
+            return path
+
+        if last_vertex not in visited:
+            visited.add(last_vertex)
+
+            neighbors = self.get_neighbors(last_vertex)
+
+            for n in neighbors:
+                new_path = path.copy()
+                new_path.append(n)
+                self.dfs_recursive(
+                    starting_vertex, destination_vertex, new_path)
 
 
 if __name__ == '__main__':
@@ -258,5 +276,5 @@ if __name__ == '__main__':
     #     [1, 2, 4, 6]
     #     [1, 2, 4, 7, 6]
     # '''
-    # print(graph.dfs(1, 6))
-    # print(graph.dfs_recursive(1, 6))
+    print(graph.dfs(1, 6))
+    print(graph.dfs_recursive(1, 6))
