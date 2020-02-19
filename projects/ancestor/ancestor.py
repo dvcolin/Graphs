@@ -7,20 +7,20 @@ def get_parents(ancestors, starting_node):
     return parents
 
 
-def earliest_ancestor(ancestors, starting_node, first_node=None):
-    # Initialize first_node to be starting_node and visited to be a set
-    if first_node == None:
-        first_node = starting_node
+def earliest_ancestor(ancestors, node, starting_node=None):
+    # Initialize first_node to be starting_node
+    if starting_node == None:
+        starting_node = node
 
     # For each item in ancestors, check if starting_node has any parents
-    if len(get_parents(ancestors, starting_node)) == 0:
+    if len(get_parents(ancestors, node)) == 0:
         # If there are no parents, and starting_node is first_node, return -1
-        if starting_node == first_node:
+        if node == starting_node:
             return -1
-        # Else return starting_node, as this is earliest ancestor
+        # Else return starting_node, as this is the earliest ancestor
         else:
-            return starting_node
+            return node
     # For each parent of starting node, recurse earliest_ancestor function
     else:
-        for p in get_parents(ancestors, starting_node):
-            return earliest_ancestor(ancestors, p, first_node)
+        for p in get_parents(ancestors, node):
+            return earliest_ancestor(ancestors, p, starting_node)
