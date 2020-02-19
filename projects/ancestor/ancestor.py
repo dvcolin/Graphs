@@ -1,8 +1,8 @@
 
-def get_parents(ancestors, starting_node):
+def get_parents(ancestors, node):
     parents = []
     for group in ancestors:
-        if group[1] == starting_node:
+        if group[1] == node:
             parents.append(group[0])
     return parents
 
@@ -12,9 +12,9 @@ def earliest_ancestor(ancestors, node, starting_node=None):
     if starting_node == None:
         starting_node = node
 
-    # For each item in ancestors, check if starting_node has any parents
+    # For each item in ancestors, check if node has any parents
     if len(get_parents(ancestors, node)) == 0:
-        # If there are no parents, and starting_node is first_node, return -1
+        # If there are no parents, and node is starting_node, return -1
         if node == starting_node:
             return -1
         # Else return starting_node, as this is the earliest ancestor
